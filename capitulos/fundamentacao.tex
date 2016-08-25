@@ -1,0 +1,527 @@
+\section{Fundamentação Teórica}\label{lfundamentacao}
+Foi visto na seção \ref{ljustificativa} que a modelagem matemática 
+utiliza as equações diferencias como ferramenta para a resolução dos 
+mais variados problemas da física, biologia, epidemiologia e etc.
+Frequentemente é necessário descrever fenômenos ou sistemas do mundo
+real em termos matemáticos, levando-se em consideração determinadas metas
+e variáveis, isso é chamado de \emph{modelo matemático} \cite{zill2003equacoes}.
+Por exemplo, podemos estudar o comportamento de um ecossistema por meio da taxa
+de variação do crescimento de sua população.
+
+No campo da física encontramos frequentemente equações diferencias que descrevem
+o comportamento de corpos, e.g., movimento uniforme (M.U.), movimento uniformemente
+variado (M.U.V.), o movimento de um pendulo simples e etc.
+A busca por esses modelos é chamado de \emph{processo de modelagem} e exigi 
+um conhecimento profundo sobre o assunto assim como conhecimentos de 
+modelagem matemática.
+
+\subsection{Definição}
+
+Antes de começar, é importante entender algumas definições e terminologias 
+básicas sobre o assunto que será tratado.
+
+É perceptível pelo nome que \emph{Equações diferencias} envolve 
+diferenciação, ou seja, é um tipo de equação que envolve derivadas.
+Essas derivadas podem conter uma ou mais variáveis independentes na mesma 
+equação - isso se tornará mais claro em breve. Diferentemente da álgebra onde
+é buscado variáveis incógnitas, que são números, as incógnitas das equações diferencias são 
+funções \cite{diacu}. Por exemplo,
+\begin{equation*}
+\frac{dx}{dt} = x^{2} + t^{2}
+\end{equation*}
+a função $x(t)$ é desconhecida, assim como sua primeira derivada. O desafio é
+encontrar todas as possíveis funções $x(t)$ e $x'(t)$ que satisfaça a igualdade.
+Em outras palavras podemos dizer, qual a função $x(t)$ que elevado ao quadrado mais
+$t$ também elevado ao quadrado é igual a derivada da própria função $x(t)$?
+Esse é um dos principais objetivos na área de equações diferencias.
+
+Podemos ter também  \emph{sistemas de equações diferencias}, que constituem um campo bem
+amplo no estudo de modelagem.
+
+Conforme definido por \citeonline[p.~2]{penneyequacoes} ``As leis do universo estão em grande parte escrita em
+linguagem matemática. [...] os fenômenos naturais mais interessantes envolvem 
+mudança, e são melhor descrito por equações que relacionam quantidades variáveis.''
+
+
+Equações diferencias podem ser classificadas por \emph{tipo}, \emph{ordem} e \emph{linearidade}.
+Não será tratado a linearidade das equações, para um aprofundamento consulte a bela obra de \cite{zill}.
+Primeiramente, será classificada a equação segundo seu tipo:
+
+\textbf{Equação Diferencial Ordinária} é um tipo de equação que 
+possui uma ou mais variáveis dependentes em relação a apenas 
+\emph{uma variável independente}. Por exemplo,
+\begin{equation*}
+y' - 5y = 1
+\end{equation*}
+
+\begin{equation*}
+u' - v' = x
+\end{equation*}
+
+\begin{equation*}
+y'' -2y' + 6y = 0
+\end{equation*}
+São equação diferencias ordinárias. Observe que em todas as equações
+apresentadas acima o $x$ é a única variável independente das equações.
+O $y$, $u$ e $v$ são variáveis dependentes de $x$.
+Para deixar de forma explicita a variável independente nas equações 
+apresentadas acima podemos usar a \emph{notação de Leibniz},
+\begin{equation*}
+\frac{dy}{dx} - 5y = 1
+\end{equation*}
+
+\begin{equation*}
+\frac{du}{dx} - \frac{dv}{dx} = x
+\end{equation*}
+
+\begin{equation*}
+\frac{d^{2}y}{dx^{2}} -2\frac{dy}{dx} + 6y = 0
+\end{equation*}
+Usaremos a sigla EDO para tratar deste tipo de equação neste trabalho.
+
+\textbf{Equação Diferencial Parcial} é um tipo de equação que 
+possui uma ou mais variáveis dependentes de 
+\emph{duas ou mais variáveis independentes}. Por exemplo,
+\begin{equation*}
+\frac{\partial^{2}u}{\partial x^{2}} + \frac{\partial^{2}u}{\partial y^{2}} = 0
+%\label{eq08}
+\end{equation*}
+
+\begin{equation*}
+x\frac{\partial u}{\partial x} + y\frac{\partial u}{\partial y} = u
+%\label{eq09}
+\end{equation*}
+
+\begin{equation*}
+\frac{\partial u}{\partial t} = 2\biggl(\frac{\partial u}{\partial x}\biggl)^{2} - 3xy\frac{\partial u}{\partial y}^{3}
+%\label{eq10}
+\end{equation*}
+Observe que nas equações acima as variáveis independentes
+são $x$, $y$, e $t$. Repare também que na mesma equação existe quantas variáveis
+independentes quisermos. Não trataremos deste tipo de equação no trabalho presente,
+nosso principal interesse são EDOs. Usualmente a sigla EDP é usada para se referir a este tipo de equação.
+
+Agora classificaremos as equações segundo sua ordem:
+
+\textbf{A ordem de uma equação diferencial} é a ordem da maior derivada na equação. Por exemplo,
+\begin{equation*}
+\frac{d^{2}y}{dx^{2}} + 3\frac{dy}{dx} + 7y = 0
+\end{equation*}
+é uma equação diferencial ordinária de segunda ordem, pois o primeiro termo
+da equação tem a segunda derivada. A equação
+\begin{equation*}
+a^{2}\frac{\partial^{4}u}{\partial x^{4}} + \frac{\partial^2u}{\partial t^{2}} = 0
+\end{equation*}
+é uma equação diferencial parcial de quarta ordem.
+
+\subsection{Problema de valor inicial}
+
+O principal objetivo desse trabalho será encontrar a solução numérica para um
+PVI (Problema de Valor Inicial). Um problema de equação diferencial ordinária de
+primeira ordem submetido a uma condição inicial, i.e., a um valor inicial. Um problema desse tipo
+tem a forma:
+\begin{equation*}
+%\left.
+\left\{
+\begin{aligned}
+ &\frac{dy}{dx} = f(x,y) \\
+ &y(x_{0}) = y_{0},
+\end{aligned}
+%\right\}
+\right.
+\end{equation*}
+O termo $\frac{dy}{dx} = f(x,y)$ é a equação diferencial ordinária de primeira ordem e
+$y(x_{0}) = y_{0}$ é a condição inicial a qual o problema é submetido. Este tipo
+de problema ocorre quando procuramos uma solução particular em determinados pontos $(x_{i},y_{i})$, e.g., digamos $y' = -5x^{2}$
+seja a função $\frac{dy}{dx} = f(x,y)$, e a nossa condição inicial é $y(1) = 2$,
+ou seja, quando $x_{0} = 1$ temos $y_{0} = 2$ então,
+\begin{equation*}
+\left\{
+\begin{aligned}
+ &y' = -5x^{2} \\
+ &y(1) = 2,
+\end{aligned}
+\right.
+\end{equation*}
+é como procurar uma curva que representa uma solução no plano $xy$ e que passe
+pelos pontos de coordenadas $(1,2)$.
+
+Na maioria das situações da vida real, a equação diferencial que modela o problema
+é muito complicada para ser resolvida com exatidão. Então utiliza-se de métodos que
+aproxima a solução do problema original, além do mais, dão resultado mais precisos e
+uma informação mais realista sobre o erro \cite{faires}.
+
+É muito comum na modelagem de problemas do mundo real encontrar problemas que envolveam
+sistemas de equações diferenciais ordinárias. Pode-se resolver uma equação
+diferencial de ordem $n > 1$ usando um sistema de $p$ equações diferencias
+ordinárias com $p$ incógnitas:
+\begin{equation*}
+\begin{aligned}
+&y'_{1} = f_{1}(x,y_{1},\dotsc,y_{p}),\\
+&y'_{2} = f_{2}(x,y_{1},\dotsc,y_{p}),\\
+&\vdots \\
+&y'_{p} = f_{p}(x,y_{1},\dotsc,y_{p}),
+\end{aligned}
+\end{equation*}
+Onde $f_{i}$ e $y_{i}(x_{0}) = \alpha$ são as funções dadas do problema e as condições
+iniciais respectivamente. Por exemplo,
+\begin{equation*}
+\begin{split}
+y'_{1} = y_{1} + y_{2} + 3x, \\
+y'_{2} = 2y_{1} - y_{2} -x,
+\end{split}
+\end{equation*}
+e as condições iniciais $y_{1}(0) = 0$, $y_{2}(0) = -1$.
+
+Os métodos números que aproximam a solução aproximada $y_{i}$ da solução exata $y(x_{i})$ - 
+denotaremos sempre a solução exata como $y(x_{i})$ e a solução aproximada obtida pelos 
+métodos como  $y_{i}$ - são calculados em pontos discretos, com subintervalos de mesmo tamanho.
+Desta forma, a solução numérica de um PVI será uma tabela com os pares $(x_{i},y_{i})$
+tomando $y_{i} \approx y(x_{i})$.
+
+O termo \emph{condição inicial} vem dos sistemas físicos em que a variável independente
+é o tempo, geralmente representa pela letra $t$ \cite{zill2003equacoes}.
+
+\subsection{Solução numérica de EDO}
+Os \emph{procedimentos numéricos} ou \emph{métodos números} oferecem uma aproximação muito
+boa da solução exata da equação diferencial. Como foi explanado na Seção
+\ref{ljustificativa} a importância do cálculo numérico para obter uma aproximação
+da solução exata, devido algumas EDs não serem passiveis de serem resolvidas analiticamente.
+
+Será abordado brevemente o conceito fundamental dos métodos que resolvem um 
+problema de valor inicial. Primeiramente, deve ser lembrado que em todo 
+procedimento numérico há acumulação de erros a cada iteração. Deve-se ter o máximo
+de cuidado com tais erros, pois eles podem aumentar consideravelmente
+e assim levar a resultados inúteis. Podemos destacar os principais erros  
+que acontecem durante as etapas de resolução de um PVI:
+\begin{enumerate}[label=\roman*.]
+\item erro de arredondamento
+\item erro de truncamento local
+\item erro de truncamento global
+\item erro absoluto e relativo\footnote{Esses não são erros acumulados durante
+as etapas, mas sim, a diferença entra a solução exata e a aproximada}
+\end{enumerate}
+
+\textbf{Erro de arredondamento} é um tipo de erro que acontece em
+computadores digitais por armazenarem números da base decimal em um número limitado
+de \emph{bits}, e também pela capacidade de realizar apenas as quatro operações
+básicas, soma ($+$), subtração ($-$), multiplicação ($\times$) e divisão($\div$).
+%consultar livro James Hardy Wilkinson, rouding errors in algebric processes
+
+\textbf{Erro de truncamento local} é um erro inerente ao método numérico. Surge
+cada vez que se substitui um procedimento matemático infinito por um processo 
+finito ou discreto \cite{sperandio2003calculo}. Em outras palavras, é o erro
+que cada passo carrega a cada iteração.
+
+\textbf{Erro local de truncamento global} já o erro global é o acumulo dos erros
+dos passos anteriores, também chamado de erro \emph{total} em $y_{n}$.
+
+\textbf{Erro absoluto e relativo} frequentemente no calculo numérico é possível
+estimar o erro ou até delimita-lo, i.e., estabelecer uma cota superior para o erro.
+É sempre desejável estabelecer uma cota para o erro, pois assim, temos controle
+da precisão de cada passo. O erro absoluto é definido com segue:
+\begin{equation*}
+\abs{valor \thickspace aproximado - valor \thickspace exato}
+\end{equation*}
+e o erro porcentual relativo é dado como:
+\begin{equation*}
+\abs{\frac{erro \thickspace absoluto}{valor \thickspace exato} \times 100}
+\end{equation*}
+
+No âmbito da resolução de EDs, temos os métodos de passo simples onde cada valor
+sucessivo $y_{k+1}$ é computado com base somente na informação sobre o valor 
+imediatamente precedente $y_{n}$. Já os métodos de múltiplo passo usa os valores
+de vários passos computados previamente para obter o valor de $y_{n+1}$.
+
+\subsubsection{Método de Euler}
+
+O \emph{método de Euler} ou \emph{método das retas tangentes}
+é uma das técnicas de passo simples  mais antigas e simples para aproximar uma solução 
+de uma EDO. Desenvolvida por Leonhard Euler (1707-1783) por volta de 1768, é 
+a espinha dorsal para os processos mais sofisticados de solução de EDOs.
+Por sua simplicidade, é muito utilizada para o ensino, mas não é recomendável
+para aplicações práticas, uma vez que, para conseguir boas estimativas é necessário
+muitos cálculos. Computacionalmente é pouco eficiente.
+
+Há diversas maneiras de representação do método de Euler. Uma abordagem simples
+e algébrica é apresentado abaixo:
+\begin{equation*}
+\frac{dy}{dx} = f(x,y)
+\end{equation*}
+Lembre-se que a derivada de uma função é simplesmente uma outra
+função que descreve a taxa na qual uma variável dependente muda em
+relação a taxa na qual a variável independente muda \cite[tradução nossa]{thompson}.
+Ou seja, a primeira derivada de uma função é seu coeficiente angular, usando a forma 
+ponto-inclinação podemos então representar o lado esquerdo da função como:
+\begin{equation*}
+\frac{y_{1}-y_{0}}{x_{1}-x_{0}} = f(x,y)
+\end{equation*}
+Fazendo algumas operações algébricas, temos:
+\begin{equation*}
+\begin{split}
+y_{1}-y_{0} = f(x,y)(x_{1}-x_{0})\\
+y_{1} = y_{0} + f(x,y)(x_{1}-x_{0})
+\end{split}
+\end{equation*}
+chamando $(x_{1}-x_{0})$ de $h$ e generalizando a equação para qualquer ponto, temos:
+\begin{equation}
+y_{k+1} = y_{k} + hf(x_{k},y_{k})
+\qquad \text{para cada k = 0, 1,$\dotsc$, N - 1}
+\label{euler}
+\end{equation}
+onde $h$ é chamado de \emph{passo} ou \emph{incremento}, frequentemente é definido como 
+\begin{equation*}
+h = (b-x_{0})/N
+\end{equation*}
+onde $b$ é o número que defini até onde será feita a aproximação. Quanto menor for $h$ melhor a 
+aproximação da solução. E $x_{k}$ é definido como $x_{k} = x_{0}+kh$, $k = 0, 1, 2,\dotsc$
+
+A equação \ref{euler} é a forma clássica do Método de Euler, a parti desse método foram criados inúmeras formas mais precisas de aproximação, que veremos logo adiante.
+
+\subsubsection{Métodos de Runge-Kutta}
+
+Há várias razões que o método de Euler não é recomendado para
+o uso prático, entre elas estão as apresentadas por \citeonline[tradução nossa]{press},
+\begin{enumerate}[label=\roman*.]
+\item O método não é muito exato quando comparado aos outros
+\item Não é estável
+\end{enumerate}
+
+
+Um dos principais objetivos do cálculo numérico é oferecer aproximações
+suficientemente precisas com um mínimo de esforço computacional \cite{faires}.
+Apresentaremos aqui brevemente alguns dos métodos mais usados na prática
+por sua alta precisão é custo computacional baixo. Os métodos de Runge-Kutta
+podem ser utilizados para gerar toda uma solução, mas esses métodos são mais lentos
+e mais complicados do que os métodos de predição-correção que serão apresentados mais
+adiante \cite{bronson}.
+
+Cada um dos métodos de Runge-Kutta consiste em comparar um polinômio de
+Taylor apropriado para eliminar o cálculo das derivadas. Desenvolvido por
+Carl David Runge (1856-1927) e Wilhelm Martin Kutta (1867-1944), ambos matemáticos
+alemães \cite{valle}.
+
+Usaremos as siglas RK para denotar Runge-Kutta. Há métodos de RK  de várias ordens.
+Será apresentado os métodos de forma crescente de ordem, ou seja, do método de ordem
+mais baixa até o método de ordem quatro. Métodos RK são de passos simples.
+
+\textbf{Runge-Kutta primeira ordem} é um procedimento igual ao de Euler.
+Veja abaixo a equação familiar:
+\begin{equation*}
+y_{k+1} = y_{k} + hf(x_{k},y_{k})
+\qquad \text{para cada k = 0, 1,$\dotsc$, N - 1}
+\end{equation*}
+onde podemos escrever de uma forma genérica para seguir o padrão mais conhecido
+dos métodos de RK:
+\begin{equation*}
+\begin{split}
+k_{1} = f(x_{k},y_{k})\\
+y_{k+1} = y_{k} + hk_{1}
+\end{split}
+\end{equation*}
+
+\textbf{Runge-Kutta segunda ordem} nessa categoria de métodos, temos não apenas
+o método clássico de RK segunda ordem, mas métodos melhorados que possuem ordem
+dois. O primeiro método é chamado de \emph{método do ponto médio}:
+\begin{equation*}
+\begin{split}
+k_{1} = f(x_{k},y_{k})\\
+k_{2} = f(x_{k} + \frac{h}{2}, y_{k} + \frac{k_{1}}{2})\\
+y_{k+1} = y_{k} + hk_{2}
+\end{split}
+\end{equation*}
+Um dos mais importantes é o \emph{método Modificado de Euler}
+\begin{equation*}
+\begin{split}
+k_{1} = f(x_{k}, y_{k})\\
+k_{2} = f(x_{k+1}, y_{k} + hf(x_{k}, y_{k}))\\
+y_{k+1} = y_{k} + \frac{h}{2}(k_{1} + k_{2})
+\end{split}
+\end{equation*}
+O outro método importante é o \emph{método de Heun}; Karl Heun (1859-1929) foi um matemático alemão que desenvolveu a equação de diferenças mostrada a seguir:
+\begin{equation*}
+\begin{split}
+k_{1} = f(x_{k}, y_{k})\\
+k_{2} = f(x_{k} + \frac{2}{3}h, y_{k} + \frac{2}{3}hk_{1})\\
+y_{k+1} = y_{k} + \frac{h}{4}(k_{1} + 3k_{2})
+\end{split}
+\end{equation*}
+
+\textbf{Runge-Kutta terceira ordem}
+\begin{equation*}
+\begin{split}
+k_{1} = f(x_{k}, y_{k})\\
+k_{2} = f(x_{k} + \frac{1}{2}h, y_{k} + \frac{1}{2}k_{1})\\
+k_{3} = f(x_{k} + h, y_{k} - k_{1} + 2k_{2})\\
+y_{k+1} = y_{k} + \frac{h}{6}(k_{1} + 4k_{2} + k_{3})
+\end{split}
+\end{equation*}
+
+\textbf{Runge-Kutta quarta ordem} esse é um dos métodos mais usados na prática por sua precisão:
+\begin{equation*}
+\begin{split}
+k_{1} = f(x_{k}, y_{k})\\
+k_{2} = f(x_{k} + \frac{1}{2}h, y_{k} + \frac{1}{2}k_{1})\\
+k_{3} = f(x_{k} + \frac{1}{2}h, y_{k} + \frac{1}{2}k_{2})\\
+k_{4} = f(x_{k} + h, y_{k} + k_{3})\\
+y_{k+1} = y_{k} + \frac{h}{6}(k_{1} + 4k_{2} + k_{3})
+\end{split}
+\end{equation*}
+\textbf{Dormand-Prince} no inicio da década de 1980 J. R. Dormand e P. J. Prince propuseram um método similar
+ao de Runge-Kutta, porém de ordem 5 \cite{filho2007algoritmos}:
+\begin{equation*}
+\begin{split}
+	k_{1} = hf(x_{k}, y_{k})\\
+	\\
+    k_{2} = hf(x_{k} + \frac{1}{5}h, y_{k} + \frac{1}{5}k1  )\\
+    \\
+    k_{3} = hf(x_{k} + \frac{3}{10}h, y_{k} + \frac{3}{40}k1 + \frac{9}{40}k2 )\\
+    \\
+    k_{4} = hf(x_{k} + \frac{4}{5}h, y_{k} + \frac{44}{45}k1 + \frac{-56}{15}k2 + \frac{32}{9}k3 )\\
+    \\
+    k_{5} = hf(x_{k} + \frac{8}{9}h, y_{k} + \frac{19372}{6561.0}k1 + \frac{-25360}{2187.0}k2 + \frac{64448}{6561.0}k3 + \frac{-212}{729.0}k4 )\\
+    \\
+    k_{6} = hf(x_{k} + 1h, y_{k} + \frac{9017}{3168}k1 + \frac{-355}{33}k2 + \frac{46732}{5247}k3 + \frac{49}{176}k4 + \frac{-5103}{18656}k5 )\\
+    \\
+    y_{k+1} = y_{k} + \frac{35}{384}k1 + \frac{500}{1113}k3 + \frac{125}{192}k4 + \frac{-2187}{6784.0}k5 + \frac{11}{84}k6
+\end{split}
+\end{equation*}
+
+\textbf{Método de Runge-Kutta-Fehlberg} um processo proposto por Erwin Fehlberg - também matemático alemão, no final 
+da década de 1960, utiliza dois métodos de ordens diferentes, um de ordem 4 e outro de
+ordem 5. O método de Runge-Kutta-Fehlberg é considerado um método de ordem 4.
+\begin{equation*}
+\begin{split}
+k_{1} = hf(x_{k}, y_{k})\\
+\\
+k_{2} = hf(x_{k} + \frac{1}{4}h, y_{k} + \frac{1}{4}k_{1})\\
+\\
+k_{3} = hf(x_{k} + \frac{3}{8}h, y_{k} + \frac{3}{32}k_{1} + \frac{9}{32}k_{2})\\
+\\
+k_{4} = hf(x_{k} + \frac{12}{13}h, y_{k} + \frac{1932}{2197}k_{1} - \frac{7200}{2197}k_{2} + \frac{7296}{2197}k_{3})\\
+\\
+k_{5} = hf(x_{k} + h, y_{k} + \frac{439}{216}k_{1} - \frac{8}k_{2} + \frac{3680}{513}k_{3} - \frac{845}{4104}k_{4})\\
+\\
+y_{k+1} = y_{k} + \frac{25}{216}k_{1} + \frac{1408}{2565}k_{3} + \frac{2197}{4104}k_{4} - \frac{1}{5}k_{5}
+\end{split}
+\end{equation*}
+Os métodos apresentados acima são alguns dos mais conhecidos da classe dos métodos
+de Runge-Kutta, existe inúmeros outros métodos.
+
+\subsubsection{Métodos de Múltiplo passos}
+Os métodos de múltiplo passos usa os valores de vários passos computados 
+previamente para obter o valor de $y_{n+1}$.
+Denotaremos nesta Seção as equações da seguinte forma:
+
+equação de predição: $y^{P}$
+
+equação de correção: $y^{C}$
+
+equação modificadora: $y^{M}$
+
+\textbf{Método de Adams-Bashforth-Moulton} Um dos métodos mais populares de passo múltiplo, preditor-corretor é o de 
+Adams-Bashforth-Moulton de quarta ordem:
+\begin{equation*}
+\begin{split}
+y^{P}_{k+1} = y_{k} + \frac{h}{24}(55f_{k} - 59f_{k-1} + 37f_{k-2} - 9f_{k-3})\\
+\\
+y^{C}_{k+1} = y_{k} + \frac{h}{24}(9f^{P}_{k+1} + 19f_{k} - 5f_{k-1} + f_{k-2})\\
+\qquad \text{para k = 3, 4,$\dotsc$, N-1}
+\end{split}
+\end{equation*}
+onde a equação $y^{P}_{k+1}$ prediz um valor a ser computado e corrigido por $y^{C}_{k+1}$.
+Neste procedimento, é necessário ter computado previamente os valores $y_{0}$, $y_{1}$, $y_{2}$, $y_{3}$ por um
+método de passo simples de quarta ordem, e.g., Runge-Kutta-Fehlberg ou Dormand-Prince. 
+
+\textbf{Método de Milne} é também um método de quarta ordem: 
+\begin{equation*}
+\begin{split}
+y^{P}_{k+1} = y_{k-3} + \frac{4h}{3}(2f_{k} - f_{k-1} + 2f_{k-2})\\
+\\
+y^{C}_{k+1} = y_{k-1} + \frac{h}{3}(f^{P}_{k+1} + 4f_{k} + f_{k-1})\\
+\qquad \text{para k = 3, 4,$\dotsc$, N-1}
+\end{split}
+\end{equation*}
+Também neste procedimento é necessário ter computado previamente os valores $y_{0}$, $y_{1}$, $y_{2}$, $y_{3}$.
+Geralmente utiliza-se o método de RK de ordem 4 para computar os valores iniciais $y_{0}$, $y_{1}$, $y_{2}$, $y_{3}$.
+
+\textbf{Método de Milne modificado} através de uma análise de erro nos métodos
+de predição-correção, pode-se modificar, i.e., melhorar o valor predito. 
+\begin{equation*}
+\begin{split}
+y^{P}_{k+1} = y_{k-3} + \frac{4h}{3}(2f_{k} - f_{k-1} + 2f_{k-2})\\
+\\
+y^{M}_{k+1} = y^{P}_{k+1} + \frac{28}{29}(y_{k} - y^{P}_{k})\\
+\\
+y^{C}_{k+1} = y_{k-1} + \frac{h}{3}(f^{M}_{k+1} + 4f_{k} + f_{k-1})\\
+\qquad \text{para k = 4, 5,$\dotsc$, N-1}
+\end{split}
+\end{equation*} 
+
+\textbf{Método de Hamming} trata-se de outro método de quarta ordem; utiliza
+a mesma equação de predição que o método de Milne:
+\begin{equation*}
+\begin{split}
+y^{P}_{k+1} = y_{k-3} + \frac{4h}{3}(2f_{k} - f_{k-1} + 2f_{k-2})\\
+\\
+y^{C}_{k+1} = \frac{1}{8}(9y_{k} - y_{k-2}) + \frac{3h}{8}(f^{P}_{k+1} + 2f_{k} - f_{k-1})\\
+\qquad \text{para k = 3, 4,$\dotsc$, N-1}
+\end{split}
+\end{equation*}
+
+\textbf{Método de Hamming modificado}
+\begin{equation*}
+\begin{split}
+y^{P}_{k+1} = y_{k-3} + \frac{4h}{3}(2f_{k} - f_{k-1} + 2f_{k-2})\\
+\\
+y^{M}_{k+1} = y^{P}_{k+1} + \frac{112}{121}(y_{k} - y^{P}_{k})\\
+\\
+y^{C}_{k+1} = y_{k-1} + \frac{1}{8}(9y_{k} - y_{k-2}) + \frac{3h}{8}(f^{M}_{k+1} + 2f_{k} - f_{k-1})\\
+\qquad \text{para k = 4, 5,$\dotsc$, N-1}
+\end{split}
+\end{equation*}
+Nenhum dos métodos modificados acima poder ser utilizado sem que se conheçam previamente
+os valores de $y_{0}$, $y_{1}$, $y_{2}$, $y_{3}$ e $y_{4}$. O valor $y_{4}$ se 
+calcula pelo correspondente método de predição-correção não-modificado \cite{bronson}.
+
+\subsection{Análise da complexidade}
+
+Neste trabalho será realizado a análise de complexidade dos métodos de passo 
+simples e múltiplo. Todos esses métodos possuem uma ordem de complexidade baixa, i.e.,
+são algoritmos simples que envolvem apenas as quatro operações fundamentais.
+
+\emph{Análise da complexidade} ou \emph{complexidade computacional} indica quanto
+esforço é necessário para se aplicar um algoritmo, ou quão custoso ele é \cite{drozdek}.
+A expressão ``quantidade de trabalho requerido'' também é chamada \emph{complexidade do algoritmo} \cite{toscani}.
+
+Não se pode analisar um algoritmo testando-o em uma máquina real, e.g., em um PC ou
+em um MAC, pois as especificações de hardware pode variar, como o processador e a
+quantidade de memória disponível para rodar o programa. Então não é recomendado usar unidades
+de tempo como nanosegundos ou segundos para comparar um algoritmo - quando esse tipo de medida é 
+usada chamamos de \emph{medida empírica}. Para solucionar esse problema são usados 
+unidades de tempo lógicas para fazer essa análise.
+
+Existe várias formas de medida de análise de um algoritmo, entre elas temos:
+
+\textbf{Complexidade de tempo} uma das medidas de complexidade mais usadas e importante \cite{toscani} e que receberá maior
+atenção neste trabalho. Neste tipo de medida é feita uma análise matemática das dificuldades intrínsecas da resolução do 
+problema computacionalmente. De uma forma informal, é estudado funções que nos permite saber a quantidade de instruções necessárias
+para uma determinada entrada de $n$ elementos.
+
+\textbf{Complexidade de espaço} é a memória usada por um programa. Esta pesquisa não será direcionada a esse tipo de medida. 
+
+Para tratarmos quais algoritmos são melhores com uma certa entrada de $n$ elementos
+será usado a \emph{notação assintótica}. O \emph{comportamento assintótico} descreve a taxa de crescimento de uma função
+$f(n)$ quando $n \rightarrow \infty$ onde $n$ é o número de elementos de entrada. Essa análise é mais procurado quado a entrada é um volume grande
+de dados.
+Existem três tipos de notação assintótica:
+
+\textbf{O-Grande} impõe um limite assintótico superior.
+
+\textbf{$\Omega$ (ômega)} impõe um limite assintótico inferior.
+
+\textbf{$\Theta$ (theta)} impõe um limite assintótico superior e inferior.
+
+Tais notações são convenientes para descrever a função do tempo de execução no
+pior caso $T(n)$, que em geral é definida somente sobre tamanhos de entrada inteiros \cite{cormen}.
+A mais utilizada é a notação O-Grande, e é a que será utilizada no presente trabalho.

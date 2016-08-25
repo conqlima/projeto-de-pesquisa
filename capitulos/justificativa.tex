@@ -1,0 +1,78 @@
+\section{Justificativa}\label{ljustificativa}
+
+Equações Diferencias Ordinárias são ferramentas importantíssimas 
+para a modelagem matemática de problemas do mundo real. Elas podem
+descrever fenômenos físicos, biológicos, químicos, epidemiológicos etc.,
+quando estes fenômenos são descritos em termos de taxa de variação \cite[p.~293]{filho2007algoritmos}.
+Exemplos práticos que usam EDOs são, taxa de crescimento de uma
+população de bactérias, taxa de crescimento de uma população de uma
+cidade ou a propagação de uma doença em um grupo populacional.
+
+Nem sempre é possível resolver uma EDO por meio analítico, ou seja,
+encontrar a solução para a equação incógnita por meio de funções
+elementares da matemática. Mesmo equações diferencias com aspecto 
+simples como:
+\begin{equation*}
+y' = x^2 + y^2
+%\label{eq01}
+\end{equation*}
+ou
+\begin{equation*}
+y'' = 6y^2 + x
+%\label{eq02}
+\end{equation*} 
+não podem ser resolvidas em termos de funções elementares \cite[p.~275]{calculo}.
+Um outro exemplo é a equação
+\begin{equation*}
+y' = 1 - 2xy
+%\label{eq03}
+\end{equation*}
+cuja solução 
+\begin{equation*}
+y(x) = e^{-x^{2}} \int_0^x\! e^{t^{2}} \mathrm{d}t
+%\label{eq04}
+\end{equation*}
+não pode ser expressa em termos de funções elementares.
+%É importante destacar que as três equações citadas acima são ordinárias
+%ou seja, existe apenas uma variável independente que no caso acima 
+%é o $x$. Equações com mais de uma variável independente serão discutidas
+%logo abaixo. 
+\citeauthoronline{sperandio2003calculo} destaca,
+%\citeonline[p.~231]{sperandio2003calculo} destaca 
+\begin{citacao}
+$[$ \ldots $]$ que em muitos casos os coeficientes ou as funções existentes  na equação diferencial são
+dados somente na forma de um conjunto tabelado de dados experimentais,
+o que torna impossível o uso de um procedimento analítico para determinar
+a solução da equação (\citeyear{sperandio2003calculo}, p. 231).
+\end{citacao}
+
+Para as soluções numéricas não existem limitações, pois são usados valores
+da variável independente e, pelo  menos, um resultado já conhecido da função.
+Como esses métodos requerem cálculos em vários pontos, a resolução
+manual não é nem um pouco atrativa, levando ao cansaço e muito suscetível 
+ao erro. Bem, na era digital em que vivemos existe computadores com um
+alto poder de processamento. Um processador de um computador 
+popular pode chegar a casa de bilhões de cálculos por segundo.
+
+Como visto acima, essas equações descrevem com ajuda da computação
+uma gama muito grande de problemas do mundo real; visando a importância
+desse tipo de equação, em meados do século XVIII, ela se transformou em
+uma disciplina independente. Ainda segundo \citeonline[p.~231]{sperandio2003calculo} ``no final desse 
+mesmo século, a teoria das equações diferencias se transformou num
+dos estudos mais importantes, em que se destacam as contribuições de 
+Euler, Lagrange e Laplace''.
+
+Vale ressaltar que existem equação diferenciais ordinárias (EDO) e
+equações diferencias parciais (EDP) que usam mais de uma variável
+independente. Para a resolução desta ultima equação são utilizados
+métodos que não fazem parte do escopo deste trabalho.
+ 
+Porém, é importante lembrar que esses métodos
+como outros do cálculo numérico acumulam erros a cada iteração.
+Uma boa implementação dos métodos é a chave para bons resultados
+e eficiência. Cada linguagem de programação possui sua particularidade
+e elas devem ser respeitadas nas implementações de cada método. 
+
+Por tais razões apresentadas acimas, entre outras, o uso do cálculo
+numérico para determinar a solução de equações diferenciais 
+é de suma importância.
