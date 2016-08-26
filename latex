@@ -1,0 +1,5 @@
+makeindex abntex2-modelo-projeto-pesquisa
+pdflatex abntex2-modelo-projeto-pesquisa
+bibtex abntex2-modelo-projeto-pesquisa
+pdflatex abntex2-modelo-projeto-pesquisa
+pdflatex abntex2-modelo-projeto-pesquisa
