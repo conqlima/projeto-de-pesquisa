@@ -33,23 +33,18 @@
 {
 	\begin{capa}
 	
-		\center
-		
 		\begin{center}
 		\MakeUppercase{\bfseries\normalsize\imprimirautor}
-		\end{center}
 		
-		\vfill
-		
-		\begin{center}
+		\begin{vplace}
 		\MakeUppercase{\bfseries\normalsize\imprimirtitulo}
-		\end{center}
-		
-		\vfill
+		\end{vplace}
 		
 		\MakeUppercase{\bfseries\normalsize\imprimirlocal}
 		
 		\MakeUppercase{\bfseries\normalsize\imprimirdata}
+	
+	\end{center}
 	
   \end{capa}
 }
@@ -66,13 +61,11 @@
 	
 	\MakeUppercase{\bfseries\normalsize\imprimirautor}
 	
-	\vspace*{\fill}\vspace*{\fill}\vspace*{\fill}\vspace{0.5cm}
+	\vfill\vfill
 	
-	\begin{center}
+	\begin{vplace}
 	\MakeUppercase{\bfseries\normalsize\imprimirtitulo}
-	\end{center}
-	
-	\vspace*{3cm}
+	\end{vplace}
 	
 	\abntex@ifnotempty{\imprimirpreambulo}
 	{
@@ -81,10 +74,8 @@
 	  \SingleSpacing
 	  \imprimirpreambulo
 	  \end{minipage}
-	  \vspace*{\fill}
 	}
-	
-	\vspace{0.6cm}
+	\vfill
 	\MakeUppercase{\bfseries\normalsize\imprimirlocal}
 	
 	\MakeUppercase{\bfseries\normalsize\imprimirdata}
